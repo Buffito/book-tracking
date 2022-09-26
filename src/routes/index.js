@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt');
 const validator = require("email-validator");
 const bodyParser = require('body-parser')
 
-
 const { Router } = require("express");
 const router = Router();
 

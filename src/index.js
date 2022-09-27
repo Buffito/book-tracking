@@ -1,13 +1,21 @@
 require("dotenv").config();
 
+const mongoose = require("mongoose");
+
+const bodyParser = require("body-parser");
+
 const app = require('./app');
 
 const host = process.env.HOST;
 const port = process.env.PORT;
 
-async function main(){
-    app.listen(port);
-    console.log(`Server Started on http://${host}:${port}`);
+function main() {
+    mongoose.connect(process.env.MONGO_URL, {
+            useNewUrlParser: true
+    }, () => {
+            console.log("Database connection established");
+            app.listen(3000, () => console.log(`Server Started on http://${host}:${port}`));
+    });
 }
 
 main();

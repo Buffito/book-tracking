@@ -1,15 +1,8 @@
-const bcrypt = require('bcrypt');
-const validator = require("email-validator");
-const bodyParser = require('body-parser')
-
 const { Router } = require("express");
 const router = Router();
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
-app.use(express.json());
+const bcrypt = require('bcrypt');
+const validator = require("email-validator");
 
 router.get("/", async (req, res) => {
     res.render("index");
@@ -18,5 +11,12 @@ router.get("/", async (req, res) => {
 router.get("/create", async(req, res) =>{
     res.render("create");
 });
+
+router.get("/skip-to-list", async (req, res) => {
+    res.render("book-list", {
+        username : 'teo',
+    });
+});
+
 
 module.exports = router;

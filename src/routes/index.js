@@ -18,8 +18,8 @@ router.get("/create", async (req, res) => {
 });
 
 router.post("/auth", async (req, res) => {
-  let authEmail = request.body.email;
-  let authPassword = request.body.password;
+  let authEmail = req.body.email;
+  let authPassword = req.body.password;
 
   let authUser = await user.findOne({
     email: authEmail,
@@ -57,6 +57,26 @@ router.post("/register", async (req, res) => {
   let authUser = await user.findOne({
     email: regEmail,
   });
+
+  if (!authUser) {
+    try {
+      await regUser.save();
+      loggedUser = regUsername;
+      renderTasks(res, "");
+    } catch (err) {
+      renderView("create", res, "User was not created!");
+    }
+  } else {
+    renderView("create", res, "User already exists!");
+  }
+});
+
+router.get("/goToAdd", async (req, res) => {
+  renderView("add-book", res, "");
+});
+
+router.post("/addBook", async (req, res) => {
+  renderView("add-book", res, "");
 });
 
 router.get("/skip-to-list", async (req, res) => {

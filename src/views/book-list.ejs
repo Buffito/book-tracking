@@ -15,7 +15,7 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
-    <link href="../public/book-list.css" rel="stylesheet" type="text/css" />
+    <link href="../public/book.css" rel="stylesheet" type="text/css" />
   </head>
   <body class="text-center">
     <div class="m-auto">
@@ -62,6 +62,12 @@
             </tr>
           </tbody>
         </table>
+
+        <form action="/goToAdd" method="GET">
+          <button class="btn btn-lg btn-secondary" type="submit">
+            Add book
+          </button>
+        </form>
     </div>
   </body>
 </html>

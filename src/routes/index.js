@@ -13,19 +13,18 @@ router.get("/", async (req, res) => {
   res.render("index");
 });
 
-router.get("/create", async (req, res) => {
-  renderView("create", res, "");
+router.get("/goToRegister", async (req, res) => {
+  renderView("register", res, "");
 });
 
-router.post("/auth", async (req, res) => {
+router.post("/authenticateUser", async (req, res) => {
   let authEmail = req.body.email;
   let authPassword = req.body.password;
 
-  let authUser = await user.findOne({
-    email: authEmail,
-  });
-
-  if (authUser) {
+  if (emailExists()) {
+    if(req.body.remember){
+      // add cookie 
+    }
     let hashedPassword = await bcrypt.compare(authPassword, authUser.password);
     if (hashedPassword) {
       loggedUser = authUser.username;
@@ -34,11 +33,12 @@ router.post("/auth", async (req, res) => {
       });
     }
   } else {
-    renderView("create", res, "");
+    renderView("register", res, "");
+    // add authentication error
   }
 });
 
-router.post("/register", async (req, res) => {
+router.post("/registerUser", async (req, res) => {
   const salt = await bcrypt.genSalt(10);
 
   let regUsername = req.body.username;
@@ -46,7 +46,7 @@ router.post("/register", async (req, res) => {
   let regEmail = "";
 
   if (validator.validate(req.body.email)) regEmail = req.body.email;
-  else renderView("create", res, "Email was not valid!");
+  else renderView("register", res, "Email was not valid!");
 
   let regUser = new user({
     username: regUsername,
@@ -54,29 +54,27 @@ router.post("/register", async (req, res) => {
     email: regEmail,
   });
 
-  let authUser = await user.findOne({
-    email: regEmail,
-  });
-
-  if (!authUser) {
+  if (!emailExists()) {
     try {
       await regUser.save();
       loggedUser = regUsername;
-      renderTasks(res, "");
+      res.render("book-list", {
+        username: loggedUser,
+      });
     } catch (err) {
-      renderView("create", res, "User was not created!");
+      renderView("register", res, "User was not created :(");
     }
   } else {
-    renderView("create", res, "User already exists!");
+    renderView("register", res, "User already exists!");
   }
 });
 
 router.get("/goToAdd", async (req, res) => {
-  renderView("add-book", res, "");
+  res.render("add-book");
 });
 
 router.post("/addBook", async (req, res) => {
-  renderView("add-book", res, "");
+  res.render("add-book");
 });
 
 router.get("/skip-to-list", async (req, res) => {
@@ -89,6 +87,14 @@ function renderView(viewName, res, message) {
   res.render(viewName, {
     message: message,
   });
+}
+
+async function emailExists(){
+  let authUser = await user.findOne({
+    email: regEmail,
+  });
+
+  return authUser;
 }
 
 module.exports = router;

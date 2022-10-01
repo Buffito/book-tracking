@@ -4,11 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login</title>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-      crossorigin="anonymous"
-    ></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -20,9 +15,9 @@
   </head>
   <body class="text-center">
     <div class="form-login w-100 m-auto">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      <h1 class="h3 fw-bold mb-4"">Login</h1>
 
-      <form action="/auth" method="POST">
+      <form action="/auth" method="POST" autocomplete="off">
         <div class="form-floating">
           <input
             type="email"
@@ -46,17 +41,36 @@
           <label for="floatingPassword">Password</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
-          Sign in
-        </button>
+        <div class="d-flex align-items-center">
+          <div class="form-check">
+            <input
+              type="checkbox"
+              name="remember"
+              id="remember"
+              class="form-check-input"
+              checked="false" 
+              value="false"
+            />
+            <label for="remember" class="form-check-label">Remember Me</label>
+          </div>
+          <button type="submit" class="btn btn-success ms-lg-auto">Login</button>
+        </div>
       </form>
 
-      <form action="/create" method="GET">
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
-          Create account
-        </button>
+      <form action="/goToRegister" method="GET">
+        <div class="card-footer py-3 border-0">
+          <div class="text-center">
+            Don't have an account?
+            <button type="submit" class="btn btn-link text-dark" outline-none>
+              Create one!
+            </button>
+          </div>
+        </div>
       </form>
-	  
+      <div class="text-center mt-5 text-muted">
+        Copyright &copy; 2022-2023 <br />
+        Theodoros Kotoufos
+      </div>
     </div>
   </body>
 </html>

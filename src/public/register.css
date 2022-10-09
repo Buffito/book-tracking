@@ -49,13 +49,13 @@ label {
   display: inline-block;
 }
 
-.form-login input[type="text"] {
+.form-login input[id="registerUsername"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.form-login input[type="password"] {
+.form-login input[id="registerPassword"] {
   margin-bottom: -1px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
@@ -63,7 +63,7 @@ label {
   border-bottom-left-radius: 0;
 }
 
-.form-login input[type="email"] {
+.form-login input[id="registerEmail"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;

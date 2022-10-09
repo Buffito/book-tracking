@@ -17,12 +17,12 @@
     <div class="form-login w-100 m-auto">
       <h1 class="h3 fw-bold mb-4"">Login</h1>
 
-      <form action="/auth" method="POST" autocomplete="off">
+      <form action="/user/login" method="POST" autocomplete="off">
         <div class="form-floating">
           <input
             type="email"
             class="form-control"
-            id="email"
+            id="authenticationEmail"
             placeholder="name@example.com"
             name="email"
             required
@@ -33,7 +33,7 @@
           <input
             type="password"
             class="form-control"
-            id="password"
+            id="authenticationPassword"
             placeholder="Password"
             name="password"
             required
@@ -53,8 +53,9 @@
             />
             <label for="remember" class="form-check-label">Remember Me</label>
           </div>
-          <button type="submit" class="btn btn-success ms-lg-auto">Login</button>
+          <button id="loginButton" type="submit" class="btn btn-success ms-lg-auto">Login</button>
         </div>
+        <label id="error" for="error_message"> <%= message %> </label>
       </form>
 
       <form action="/goToRegister" method="GET">
@@ -67,10 +68,6 @@
           </div>
         </div>
       </form>
-      <div class="text-center mt-5 text-muted">
-        Copyright &copy; 2022-2023 <br />
-        Theodoros Kotoufos
-      </div>
     </div>
   </body>
 </html>

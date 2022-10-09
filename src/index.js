@@ -2,8 +2,6 @@ require("dotenv").config();
 
 const mongoose = require("mongoose");
 
-const bodyParser = require("body-parser");
-
 const app = require("./app");
 
 const host = process.env.HOST;
